@@ -43,17 +43,14 @@ export default function Register({ onAuth }) {
   return (
     <Box sx={{
       minHeight: '100vh', display: 'flex', alignItems: 'center', justifyContent: 'center',
-      background: 'radial-gradient(ellipse at 50% 0%, rgba(124,77,255,0.15) 0%, transparent 60%)',
+      background: 'linear-gradient(160deg, #faf9f6 0%, #fff8e1 50%, #fff3d0 100%)',
     }}>
       <Container maxWidth="xs">
         <Box sx={{ textAlign: 'center', mb: 3 }}>
-          <AutoAwesomeIcon sx={{ fontSize: 48, color: '#7c4dff', mb: 1 }} />
-          <Typography variant="h4" fontWeight={800} sx={{
-            background: 'linear-gradient(135deg, #7c4dff, #00e5ff)',
-            WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent',
-          }}>Get Started</Typography>
+          <AutoAwesomeIcon sx={{ fontSize: 48, color: '#f5a623', mb: 1 }} />
+          <Typography variant="h4" fontWeight={800} sx={{ color: '#1a1a1a' }}>Get Started</Typography>
         </Box>
-        <Paper sx={{ p: 4, background: 'rgba(255,255,255,0.03)' }}>
+        <Paper sx={{ p: 4 }}>
           {error && <Typography color="error" sx={{ mb: 2, textAlign: 'center', fontSize: 14 }}>{error}</Typography>}
           <Box component="form" onSubmit={handleSubmit}>
             {fields.map((f) => (
@@ -67,7 +64,7 @@ export default function Register({ onAuth }) {
             </Button>
           </Box>
           <Typography align="center" sx={{ mt: 3, color: 'text.secondary' }}>
-            Already registered? <Link href="/login" underline="hover" sx={{ color: '#7c4dff', fontWeight: 600 }}>Sign In</Link>
+            Already registered? <Link href="/login" underline="hover" sx={{ color: '#f5a623', fontWeight: 600 }}>Sign In</Link>
           </Typography>
         </Paper>
       </Container>

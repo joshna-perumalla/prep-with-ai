@@ -10,7 +10,7 @@ public class InterviewDto {
     @Getter @Setter @NoArgsConstructor @AllArgsConstructor
     public static class StartRequest {
         @NotBlank private String domain;
-        @NotBlank private String techStack;
+        private String techStack;
         @NotBlank private String difficulty;
     }
 

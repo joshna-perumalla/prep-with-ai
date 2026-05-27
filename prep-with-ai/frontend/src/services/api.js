@@ -31,4 +31,16 @@ export const interviewApi = {
   getHistory: () => api.get('/interviews/history'),
 };
 
+export const leaderboardApi = {
+  get: (params) => api.get('/leaderboard', { params }),
+  getFilters: () => api.get('/leaderboard/filters'),
+};
+
+export const codingApi = {
+  generate: (data) => api.post('/coding/generate', data),
+  submit: (problemId, data) => api.post(`/coding/problems/${problemId}/submit`, data),
+  getProblem: (id) => api.get(`/coding/problems/${id}`),
+  getHistory: () => api.get('/coding/history'),
+};
+
 export default api;

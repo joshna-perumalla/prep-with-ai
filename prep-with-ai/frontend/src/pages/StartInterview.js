@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { Container, Paper, Typography, TextField, Button, MenuItem, Box, InputAdornment } from '@mui/material';
+import { useTheme } from '@mui/material/styles';
 import { useNavigate } from 'react-router-dom';
 import { interviewApi } from '../services/api';
 import CategoryRoundedIcon from '@mui/icons-material/CategoryRounded';
@@ -9,9 +10,19 @@ import PlayArrowRoundedIcon from '@mui/icons-material/PlayArrowRounded';
 
 const DOMAINS = ['Backend Development', 'Frontend Development', 'Full Stack', 'Data Structures', 'System Design', 'Database', 'DevOps'];
 const DIFFICULTIES = ['Easy', 'Medium', 'Hard'];
-const DIFF_COLORS = { Easy: '#69f0ae', Medium: '#ffd740', Hard: '#ff5252' };
+const DIFF_COLORS = { Easy: '#10b981', Medium: '#f59e0b', Hard: '#ef4444' };
+const NO_TECH_STACK_DOMAINS = ['System Design', 'Data Structures'];
+const TECH_STACK_HINTS = {
+  'Backend Development': 'e.g. Spring Boot, Node.js, Django',
+  'Frontend Development': 'e.g. React, Angular, Vue.js',
+  'Full Stack': 'e.g. React + Spring Boot, MERN',
+  'Database': 'e.g. PostgreSQL, MongoDB, MySQL',
+  'DevOps': 'e.g. Docker, Kubernetes, AWS',
+};
 
 export default function StartInterview() {
+  const theme = useTheme();
+  const isDark = theme.palette.mode === 'dark';
   const [form, setForm] = useState({ domain: '', techStack: '', difficulty: 'Medium' });
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState('');
@@ -36,10 +47,10 @@ export default function StartInterview() {
   return (
     <Box sx={{
       minHeight: 'calc(100vh - 64px)', display: 'flex', alignItems: 'center', justifyContent: 'center',
-      background: 'radial-gradient(ellipse at 30% 20%, rgba(124,77,255,0.08) 0%, transparent 50%)',
+      bgcolor: 'background.default',
     }}>
       <Container maxWidth="sm">
-        <Paper sx={{ p: 5, background: 'rgba(255,255,255,0.03)' }}>
+        <Paper sx={{ p: 5 }}>
           <Box sx={{ textAlign: 'center', mb: 3 }}>
             <Typography variant="h4" fontWeight={800}>Configure Interview</Typography>
             <Typography color="text.secondary" sx={{ mt: 0.5 }}>Choose your domain and difficulty to begin</Typography>
@@ -50,9 +61,12 @@ export default function StartInterview() {
               InputProps={{ startAdornment: <InputAdornment position="start"><CategoryRoundedIcon sx={{ color: 'text.secondary', fontSize: 20 }} /></InputAdornment> }}>
               {DOMAINS.map((d) => <MenuItem key={d} value={d}>{d}</MenuItem>)}
             </TextField>
-            <TextField fullWidth label="Tech Stack" margin="normal" required placeholder="e.g. Spring Boot, React, PostgreSQL"
-              value={form.techStack} onChange={set('techStack')}
-              InputProps={{ startAdornment: <InputAdornment position="start"><LayersRoundedIcon sx={{ color: 'text.secondary', fontSize: 20 }} /></InputAdornment> }} />
+            {!NO_TECH_STACK_DOMAINS.includes(form.domain) && (
+              <TextField fullWidth label="Tech Stack (optional)" margin="normal"
+                placeholder={TECH_STACK_HINTS[form.domain] || 'e.g. Spring Boot, React, PostgreSQL'}
+                value={form.techStack} onChange={set('techStack')}
+                InputProps={{ startAdornment: <InputAdornment position="start"><LayersRoundedIcon sx={{ color: 'text.secondary', fontSize: 20 }} /></InputAdornment> }} />
+            )}
             <TextField select fullWidth label="Difficulty" margin="normal" required value={form.difficulty} onChange={set('difficulty')}
               InputProps={{ startAdornment: <InputAdornment position="start"><SpeedRoundedIcon sx={{ color: DIFF_COLORS[form.difficulty] || 'text.secondary', fontSize: 20 }} /></InputAdornment> }}>
               {DIFFICULTIES.map((d) => <MenuItem key={d} value={d}>

@@ -30,19 +30,16 @@ export default function Login({ onAuth }) {
   return (
     <Box sx={{
       minHeight: '100vh', display: 'flex', alignItems: 'center', justifyContent: 'center',
-      background: 'radial-gradient(ellipse at 50% 0%, rgba(124,77,255,0.15) 0%, transparent 60%)',
+      background: 'linear-gradient(160deg, #faf9f6 0%, #fff8e1 50%, #fff3d0 100%)',
     }}>
       <Container maxWidth="xs">
         <Box sx={{ textAlign: 'center', mb: 4 }}>
-          <AutoAwesomeIcon sx={{ fontSize: 48, color: '#7c4dff', mb: 1 }} />
-          <Typography variant="h4" fontWeight={800} sx={{
-            background: 'linear-gradient(135deg, #7c4dff, #00e5ff)',
-            WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent',
-          }}>Prep With AI</Typography>
-          <Typography color="text.secondary" sx={{ mt: 0.5 }}>AI-powered interview preparation</Typography>
+          <AutoAwesomeIcon sx={{ fontSize: 48, color: '#f5a623', mb: 1 }} />
+          <Typography variant="h4" fontWeight={800} sx={{ color: '#1a1a1a' }}>Prep With AI</Typography>
+          <Typography sx={{ mt: 0.5, color: '#888' }}>AI-powered interview preparation</Typography>
         </Box>
-        <Paper sx={{ p: 4, background: 'rgba(255,255,255,0.03)' }}>
-          <Typography variant="h5" align="center" gutterBottom fontWeight={700}>Welcome back</Typography>
+        <Paper sx={{ p: 4 }}>
+          <Typography variant="h5" align="center" gutterBottom fontWeight={700} color="text.primary">Welcome back</Typography>
           {error && <Typography color="error" sx={{ mb: 2, textAlign: 'center', fontSize: 14 }}>{error}</Typography>}
           <Box component="form" onSubmit={handleSubmit}>
             <TextField fullWidth label="Email" type="email" margin="normal" required
@@ -56,7 +53,7 @@ export default function Login({ onAuth }) {
             </Button>
           </Box>
           <Typography align="center" sx={{ mt: 3, color: 'text.secondary' }}>
-            No account? <Link href="/register" underline="hover" sx={{ color: '#7c4dff', fontWeight: 600 }}>Create one</Link>
+            No account? <Link href="/register" underline="hover" sx={{ color: '#f5a623', fontWeight: 600 }}>Create one</Link>
           </Typography>
         </Paper>
       </Container>
